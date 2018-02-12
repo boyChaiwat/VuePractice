@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Multiplication</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+	
+	<style>
+		.space {
+			padding-right: 10px;
+		}
+		.form-inline {
+			margin-bottom: 20px;
+		}
+		.container {
+			margin-top: 50px;
+		}
+		td {
+			border:1px solid #ddd;
+			width:50px;
+			height:50px;
+			text-align:center;
+			vertical-align:middle;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+			<!-- Links -->
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" href="index.html">Calculator</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link active" href="index2.html">Multiplication</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<div class="container">
+		<div id="table">
+			<div class="row">
+				<div class="offset-md-2">
+					<h2>Multiplication Table</h2>
+					<div class="form-inline">
+						<label class="space">Input X</label>
+						<input type="text" class="form-control" v-model="number1" @input="valueX">
+					</div>
+					<div class="form-inline">
+						<label class="space">Input Y</label>
+						<input type="text" class="form-control" v-model="number2" @input="valueY">
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="offset-md-1">
+					<h3>Result {{ number1 }} x {{ number2 }} Table</h3>
+					<table class="table-bordered">
+						<tr>
+							<td colspan="1"></td>
+							<td colspan="100" style="background-color: #4CAF50; color:aliceblue;">X </td>
+						</tr>
+
+						<tr>
+							<td rowspan="100" colspan="1" style="background-color: #4CAF50; color:aliceblue;">Y</td>
+							<tr>
+								<td colspan="1" style="background-color: #fff;"></td>
+								<td v-for="xX in numX" style="background-color: aquamarine;">
+									{{ xX }}
+									<tr v-for="yY in numY" >
+										<td style="background-color: aquamarine;">{{ yY }}</td>
+										<td v-for="index in numX.length">{{ yY * index}}</td>
+									</tr>
+								</td>
+							</tr>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/vue.js"></script>
+
+	<script type="text/javascript">
+		new Vue({
+			el: '#table',
+			data: {	
+				number1: '',
+				number2: '',
+				numX: [],
+				numY: [],
+			},
+			
+			methods: {
+				valueX: function() {
+					let xX = parseInt(this.number1)
+					this.numX = []
+					for (let i = 1; i <= xX; i++) {
+						this.numX.push(i)
+					}
+				},
+				valueY: function() {
+					let yY = parseInt(this.number2)
+					this.numY = []
+					for (let j = 1; j <= yY; j++) {
+						this.numY.push(j)
+					}
+				},
+			}
+		})
+	</script>
+</html>

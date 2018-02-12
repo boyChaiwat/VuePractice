@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+	
+	<style>
+		.space {
+			padding-right: 10px;
+		}
+		.form-inline {
+			margin-bottom: 20px;
+		}
+		.container {
+			margin-top: 50px;
+		}
+	</style>
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+			<!-- Links -->
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link active" href="index.html">Calculator</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" href="index2.html">Multiplication</a>
+				</li>
+			</ul>
+		</nav>
+	</header>
+	<div class="container">
+		<div id="app">
+			<div class="row">
+				<div class="offset-md-3">
+					<h2>Calculator</h2>
+					<div class="form-inline">
+						<label class="space">Input Number #1</label>
+						<input type="text" class="form-control" v-model="number1.value">
+					</div>
+					<div class="form-inline">
+						<label class="space">Input Number #2</label>
+						<input type="text" class="form-control" v-model="number2.value">
+					</div>
+					<div class="form-inline">
+						<label class="space">Input Number #3</label>
+						<input type="text" class="form-control" v-model="number3.value">
+					</div>
+					<div class="form-inline">
+						<label class="space">Input Number #4</label>
+						<input type="text" class="form-control" v-model="number4.value">
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="offset-md-4">
+					<h3>Result</h3>
+					<p v-if="number1.value > 0 || number2.value > 0 || number3.value > 0 || number4.value > 0">
+						Max number is {{ calMax() }}
+					</p>
+					<p v-else>
+						Max number is = 0
+					</p>
+					<p v-if="number1.value > 0 || number2.value > 0 || number3.value > 0 || number4.value > 0">
+						Min number is  {{ calMin() }}
+					</p>
+					<p v-else>
+						Min number is = 0
+					</p>
+					<p v-if="calSum() > 0">
+						Sum is  {{ number1.value }} + {{ number2.value }} + {{ number3.value }} + {{ number4.value }} = {{ calSum() }}
+					</p>
+					<p v-else>
+						Sum is = 0
+					</p>
+					<p v-if="calAvg() > 0">
+						Average is  {{ calSum() }} / {{ counter }} = {{ calAvg() }}
+					</p>
+					<p v-else>
+						Average is = 0
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/vue.js"></script>
+
+	<script type="text/javascript">
+		new Vue({
+			el: '#app',
+			data: {
+				counter: 4,
+				number1: {
+					no: '1',
+					value: '',
+				},
+				number2: {
+					no: '2',
+					value: '',
+				},
+				number3: {
+					no: '3',
+					value: '',
+				},
+				number4: {
+					no: '4',
+					value: '',
+				},
+				totalNo: 0,
+				average: 0,
+				numMax: 0,
+				numMin: 0,
+			},
+			
+			methods: {
+				
+				calMax: function() {
+        			let maxx = Math.max((this.number1.value),(this.number2.value),(this.number3.value),(this.number4.value))
+					this.numMax = maxx
+					if (maxx == this.number1.value) {
+						return this.numMax + ' as #' +this.number1.no
+					} else if (maxx == this.number2.value) {
+						return this.numMax + ' as #' +this.number2.no
+					} else if (maxx == this.number3.value) {
+						return this.numMax + ' as #' +this.number3.no
+					} else if (maxx == this.number4.value) {
+						return this.numMax + ' as #' +this.number4.no
+					} else {
+						return 0
+					}
+				},
+				calMin: function() {
+        			var minn = Math.min((this.number1.value),(this.number2.value),(this.number3.value),(this.number4.value))					
+					this.numMin = minn
+					if (minn == this.number1.value) {
+						return this.numMin + ' as #' +this.number1.no
+					} else if (minn == this.number2.value) {
+						return this.numMin + ' as #' +this.number2.no
+					} else if (minn == this.number3.value) {
+						return this.numMin + ' as #' +this.number3.no
+					} else if (minn == this.number4.value) {
+						return this.numMin + ' as #' +this.number4.no
+					} else {
+						return 0
+					}
+				},
+				calSum: function() {
+        			let summit = parseFloat(this.number1.value) + parseFloat(this.number2.value) + parseFloat(this.number3.value) + parseFloat(this.number4.value)
+					this.totalNo = summit.toFixed(1)
+					return this.totalNo
+				},
+				calAvg: function() {
+					let average = parseFloat(this.number1.value) + parseFloat(this.number2.value) + parseFloat(this.number3.value) + parseFloat(this.number4.value)
+					this.totalNo = ((average.toFixed(1))/4).toFixed(2)
+					return this.totalNo
+				},
+			}
+		})
+	</script>
+</html>
